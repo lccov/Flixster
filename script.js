@@ -21,16 +21,13 @@ function displayTrending(trendingData) {
 
     data.results.forEach(movie => {
         console.log(movie)
-        photoArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">`
+        photoArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
+        <p>${movie.original_title} ${movie.vote_average}</p>`
     });
 
-    //backupSearchKey = searchKey
-    //userInput.value = ""
-
-    //pageNum = pageNum + 1
   }
 
-async function getResults(evt) {
+//async function getResults(evt) {
 
     //if (loadMore) {
         //searchKey = backupSearchKey
@@ -39,11 +36,11 @@ async function getResults(evt) {
     //}
 
     //let url = `http://api.giphy.com/v1/gifs/search?api_key=${MY_API_KEY}&q=${searchKey}&limit=${LIMIT}&rating=${RATING}&offset=${offset}`
-    let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=0dce21e41025b5df140c7122a2a69ba6&language=en-US&page=1`
-    let response = await fetch(url)
-    let responseData = await response.json()
+    //let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=0dce21e41025b5df140c7122a2a69ba6&language=en-US&page=1`
+    //let response = await fetch(url)
+    //let responseData = await response.json()
 
-    console.log(responseData)
+    //console.log(responseData)
 
     //displayResults(responseData)
 
@@ -51,16 +48,16 @@ async function getResults(evt) {
     //    showMoreBtn.classList.remove('hidden')
     //}
 
-  }
+  //}
 
-function handleFormSubmission(evt) {
-    console.log('I was submitted')
+//function handleFormSubmission(evt) {
+    //console.log('I was submitted')
     //pageNum = 0
     //photoArea.innerHTML = ``
     //loadMore = false
     //showMoreBtn.classList.add('hidden')
-    getResults(evt);
-}
+    //getResults(evt);
+//}
 
 window.onload = function () {
 

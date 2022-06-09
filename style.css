@@ -2,6 +2,10 @@ body {
     background-color: #0e1111;
 }
 
+p {
+    color: white;
+}
+
 #title-header {
     text-align: center;
     color: #FF0000;
