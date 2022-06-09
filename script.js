@@ -1,18 +1,43 @@
+// GLOBAL CONSTANTS
+const MY_API_KEY = '0dce21e41025b5df140c7122a2a69ba6';
+
 let form = document.querySelector("form")
-let photoArea = document.querySelector("#photo-area")
+let movieArea = document.querySelector("#movie-area")
+let showMoreTrendingBtn = document.querySelector("#load-more-movies-trending-btn")
+let showMoreSearchBtn = document.querySelector("#load-more-movies-search-btn")
+let userInput = document.querySelector("#search-input")
+let closeBtn = document.querySelector("#close-search-btn")
+
+let pageNum = 1
+
+let searchKey = ""
+let backupSearchKey = ""
+let loadMore = false
 
 form.addEventListener("submit", (event) => {
     event.preventDefault()
     handleFormSubmission()
 })
 
-async function getTrending() {
-    let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=0dce21e41025b5df140c7122a2a69ba6&language=en-US&page=1`
-    let response = await fetch(url)
-    let responseData = await response.json()
-    console.log(responseData)
+showMoreTrendingBtn.addEventListener("click", showMoreTrending)
+showMoreSearchBtn.addEventListener("click", showMoreSearch)
+closeBtn.addEventListener("click", closeSearch)
 
-    displayTrending(responseData)
+async function getTrending() {
+
+    let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${MY_API_KEY}&language=en-US&page=${pageNum}`
+    let trendingResponse = await fetch(url)
+    let trendingResponseData = await trendingResponse .json()
+
+    displayTrending(trendingResponseData)
+
+    if (!showMoreSearchBtn.classList.contains('hidden')) {
+        showMoreSearchBtn.classList.add('hidden')
+    }
+
+    if (showMoreTrendingBtn.classList.contains('hidden')) {
+        showMoreTrendingBtn.classList.remove('hidden')
+    }
 }
 
 function displayTrending(trendingData) {
@@ -20,48 +45,87 @@ function displayTrending(trendingData) {
     data = trendingData
 
     data.results.forEach(movie => {
-        console.log(movie)
-        photoArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
+        movieArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
         <p>${movie.original_title} ${movie.vote_average}</p>`
     });
 
+    pageNum += 1
   }
 
-//async function getResults(evt) {
+function closeSearch() {
+    pageNum = 1
+    movieArea.innerHTML = ``
+    loadMore = false
+    if (!closeBtn.classList.contains('hidden')) {
+        closeBtn.classList.add('hidden')
+    }
+    getTrending()
+  }
 
-    //if (loadMore) {
-        //searchKey = backupSearchKey
-    //} else {
-        //searchKey = userInput.value
-    //}
+async function getResults(evt) {
 
-    //let url = `http://api.giphy.com/v1/gifs/search?api_key=${MY_API_KEY}&q=${searchKey}&limit=${LIMIT}&rating=${RATING}&offset=${offset}`
-    //let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=0dce21e41025b5df140c7122a2a69ba6&language=en-US&page=1`
-    //let response = await fetch(url)
-    //let responseData = await response.json()
+    if (closeBtn.classList.contains('hidden')) {
+        closeBtn.classList.remove('hidden')
+    }
 
-    //console.log(responseData)
+    showMoreTrendingBtn.classList.add('hidden')
 
-    //displayResults(responseData)
+    if (loadMore) {
+        searchKey = backupSearchKey
+    } else {
+        searchKey = userInput.value
+    }
 
-    //if (showMoreBtn.classList.contains('hidden')) {
-    //    showMoreBtn.classList.remove('hidden')
-    //}
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${MY_API_KEY}&language=en-US&query=${searchKey}&page=${pageNum}`
+    let response = await fetch(url)
+    let searchData = await response.json()
+    console.log(searchData)
 
-  //}
+    displayResults(searchData)
 
-//function handleFormSubmission(evt) {
-    //console.log('I was submitted')
-    //pageNum = 0
-    //photoArea.innerHTML = ``
-    //loadMore = false
-    //showMoreBtn.classList.add('hidden')
-    //getResults(evt);
-//}
+    if (showMoreSearchBtn.classList.contains('hidden')) {
+        showMoreSearchBtn.classList.remove('hidden')
+    }
+
+    if (!showMoreTrendingBtn.classList.contains('hidden')) {
+        showMoreTrendingBtn.classList.add('hidden')
+    }
+  }
+
+function displayResults(searchData) {
+
+    data = searchData
+
+    data.results.forEach(movie => {
+        movieArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
+        <p>${movie.original_title} ${movie.vote_average}</p>`
+    });
+
+    backupSearchKey = searchKey
+    userInput.value = ""
+
+    pageNum += 1
+  }
+
+function showMoreTrending() {
+    loadMore = true
+    getTrending()
+}
+
+function showMoreSearch() {
+    loadMore = true
+    getResults()
+}
+
+function handleFormSubmission(evt) {
+    pageNum = 1
+    movieArea.innerHTML = ``
+    loadMore = false
+    showMoreTrendingBtn.classList.add('hidden')
+    showMoreSearchBtn.classList.add('hidden')
+    getResults(evt);
+}
 
 window.onload = function () {
-
     getTrending();
-
-    console.log("I'm working")
   }

@@ -9,21 +9,25 @@
 </head>
 <body>
 
-    <h1 id="title-header" class="center">Flixster</h1>
-    <div class="center">
+    <h1 id="page-header">Flixster</h1>
+    <div>
         <form action="" method="get">
             <div class="movie-form">
-              <input type="text" name="name" id="name" required>
+              <input type="text" name="search-input" id="search-input" required>
             </div>
             <div class="movie-form">
               <input type="submit" value="Search for a Movie!">
             </div>
           </form>
       <div>
-        <div id="photo-area"></div>
+      <div>
+        <img class="hidden" id="close-search-btn" src="images\icons8-close-64.png"  alt="close search button">
       </div>
-      <div class="center ">
-        <button id="showmore" class="hidden"> Load More Movies! </button>
+        <div id="movie-area"></div>
+      </div>
+      <div class="center">
+        <button id="load-more-movies-trending-btn" class="hidden"> Load More Movies! </button>
+        <button id="load-more-movies-search-btn" class="hidden"> Load More Movies! </button>
       </div>
     <script src="script.js"></script>
 </body>
