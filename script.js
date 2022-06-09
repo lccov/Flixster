@@ -2,7 +2,7 @@
 const MY_API_KEY = '0dce21e41025b5df140c7122a2a69ba6';
 
 let form = document.querySelector("form")
-let movieArea = document.querySelector("#movie-area")
+let movieArea = document.querySelector("#movies-grid")
 let showMoreTrendingBtn = document.querySelector("#load-more-movies-trending-btn")
 let showMoreSearchBtn = document.querySelector("#load-more-movies-search-btn")
 let userInput = document.querySelector("#search-input")
@@ -45,8 +45,8 @@ function displayTrending(trendingData) {
     data = trendingData
 
     data.results.forEach(movie => {
-        movieArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
-        <p>${movie.original_title} ${movie.vote_average}</p>`
+        movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+        <p class="movie-votes">${movie.vote_average}</p> <p class="movie-title">${movie.original_title}</p></div>`
     });
 
     pageNum += 1
@@ -97,8 +97,8 @@ function displayResults(searchData) {
     data = searchData
 
     data.results.forEach(movie => {
-        movieArea.innerHTML += `<img src=https://image.tmdb.org/t/p/w500${movie.poster_path} width="250" height="250">
-        <p>${movie.original_title} ${movie.vote_average}</p>`
+        movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+        <p class="movie-votes">${movie.vote_average}</p> <p class="movie-title">${movie.original_title}</p></div>`
     });
 
     backupSearchKey = searchKey
@@ -128,4 +128,5 @@ function handleFormSubmission(evt) {
 
 window.onload = function () {
     getTrending();
+    console.log("https://api.themoviedb.org/3/configuration?api_key=0dce21e41025b5df140c7122a2a69ba6")
   }
