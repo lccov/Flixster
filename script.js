@@ -47,11 +47,11 @@ function displayTrending(trendingData) {
 
     data.results.forEach(movie => {
         if (movie.poster_path == null) {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" onclick="showPopUp(${movie.id})"width="312" height="468">
-        <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.title} movie poster" onclick="showPopUp(${movie.id})"width="312" height="468">
+        <div class="movie-info"><p class="movie-title">${movie.title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         } else {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" onclick="showPopUp(${movie.id})" width="312" height="468">
-            <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.title} movie poster" onclick="showPopUp(${movie.id})" width="312" height="468">
+            <div class="movie-info"><p class="movie-title">${movie.title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         }
     });
 
@@ -104,11 +104,11 @@ function displayResults(searchData) {
     data.results.forEach(movie => {
         // if else for movie.poster_path
         if (movie.poster_path == null) {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" onclick="showPopUp(${movie.id}) width="312" height="468">
-        <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.title} movie poster" onclick="showPopUp(${movie.id})" width="312" height="468">
+        <div class="movie-info"><p class="movie-title">${movie.title}</p><p class="movie-votes">&#11088;${movie.vote_average}</p></div></div>`
         } else {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" onclick="showPopUp(${movie.id}) width="312" height="468">
-            <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.title} movie poster" onclick="showPopUp(${movie.id})" width="312" height="468">
+            <div class="movie-info"><p class="movie-title">${movie.title}</p><p class="movie-votes">&#11088;${movie.vote_average}</p></div></div>`
         }
     });
 
@@ -130,11 +130,15 @@ function showMoreSearch() {
 
 async function showPopUp(movie_id) {
    
-   let url = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${MY_API_KEY}&language=en-US`
-   let movieResponse = await fetch(url)
-   let movieResponseData = await movieResponse.json()
+   let detailUrl = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${MY_API_KEY}&language=en-US`
+   let movieDetailResponse = await fetch(detailUrl)
+   let movieDetailResponseData = await movieDetailResponse.json()
 
-   //console.log(movieResponseData)
+   let videoUrl = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${MY_API_KEY}&language=en-US`
+   let movieVideoResponse = await fetch(videoUrl)
+   let movieVideoResponseData = await movieVideoResponse.json()
+
+   //console.log(movieVideoResponseData)
 
    let modal = document.getElementById("moviePopUp");
    let span = document.getElementsByClassName("close")[0];
@@ -142,19 +146,30 @@ async function showPopUp(movie_id) {
 
    span.onclick = function() {
     modal.style.display = "none";
+    closePopUp()
   }
 
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      closePopUp()
     }
   }
 
-  modalContent.innerHTML = `<span class="close">&times;</span>`
+  console.log(movieVideoResponseData.results[0].key)
+
+  modalContent.innerHTML += `<iframe width="420" height="315"
+  src="https://www.youtube.com/embed/${movieVideoResponseData.results[0].key}">
+  </iframe>
+  <p>Title: ${movieDetailResponseData.title} | Release Date: ${movieDetailResponseData.release_date} | Viewer Rating: ${movieDetailResponseData.vote_average}/10 | Homepage: <a href="${movieDetailResponseData.homepage}">${movieDetailResponseData.homepage}</a></p><p>${movieDetailResponseData.overview}</p>`
 
    //movieResponseData = ''
 
    //console.log(movieResponseData)
+}
+
+function closePopUp() {
+    modalContent.innerHTML = ""
 }
 
 function handleFormSubmission(evt) {
@@ -165,7 +180,15 @@ function handleFormSubmission(evt) {
     showMoreSearchBtn.classList.add('hidden')
     getResults(evt);
 }
+const scrollUp = document.getElementById("scroll-up");
 
+scrollUp.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    });
+});
 window.onload = function () {
     getTrending();
   }

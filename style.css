@@ -71,7 +71,7 @@ button {
 
 .movie-poster {
     width: 100%;
-    opacity: 0.8; 
+    opacity: 0.6; 
 }
 
 .movie-poster:hover { 
@@ -98,6 +98,7 @@ button {
     border-radius: 3px;
     font-weight: bold;
     margin: 0;
+    white-space: nowrap; 
 }
 
 .hidden {
@@ -145,3 +146,18 @@ button {
     text-decoration: none;
     cursor: pointer;
   }
+
+  /* Styling for scroll up class */
+.scroll-up {
+    position: fixed;
+    right: 0.5%;
+    bottom: 3%;
+    cursor: pointer;
+}
+
+/* Styling for up arrow icon */
+.up-arrow {
+    width: 3rem;
+    height: 3rem;
+}
+
