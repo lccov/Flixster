@@ -81,14 +81,16 @@ header{
     display: none;
 }
 
+.button-div {
+    text-align: center;
+}
+
 button {
     background-color: #373b69;
     border: none;
     color: #FFFFFF;
     padding: 10px;
-    text-align: center;
     text-decoration: none;
-    display: flex;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;

@@ -71,4 +71,6 @@ Shout out to Osaru for being a good team mate
 
 Shout out to Roy for checking on us
 
+Shout out to Doug
+
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
