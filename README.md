@@ -1,6 +1,4 @@
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
-
-## Week 1 Assignment: Flixster
+S## Week 1 Assignment: Flixster
 
 Submitted by: **Lacie Covington**
 
@@ -34,9 +32,9 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 
 #### STRETCH FEATURES
 
-- [ ] Deploy website using GitHub Pages. 
+- [X] Deploy website using GitHub Pages. 
 - [X] Allow user to view more details about a movie within a popup.
-- [ ] Improve the user experience through CSS & animation.
+- [X] Improve the user experience through CSS & animation.
 - [X] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [X] Allow user to load more movies for searches
 - [X] Add placerholder image if movie poster was not available
