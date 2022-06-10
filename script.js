@@ -7,6 +7,7 @@ let showMoreTrendingBtn = document.querySelector("#load-more-movies-trending-btn
 let showMoreSearchBtn = document.querySelector("#load-more-movies-search-btn")
 let userInput = document.querySelector("#search-input")
 let closeBtn = document.querySelector("#close-search-btn")
+let modalContent = document.querySelector("#modal-content")
 
 let pageNum = 1
 
@@ -148,6 +149,8 @@ async function showPopUp(movie_id) {
       modal.style.display = "none";
     }
   }
+
+  modalContent.innerHTML = `<span class="close">&times;</span>`
 
    //movieResponseData = ''
 
