@@ -46,10 +46,10 @@ function displayTrending(trendingData) {
 
     data.results.forEach(movie => {
         if (movie.poster_path == null) {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" width="312" height="468">
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" onclick="showPopUp(${movie.id})"width="312" height="468">
         <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         } else {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" onclick="showPopUp(${movie.id})" width="312" height="468">
             <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         }
     });
@@ -84,7 +84,6 @@ async function getResults(evt) {
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${MY_API_KEY}&language=en-US&query=${searchKey}&page=${pageNum}`
     let response = await fetch(url)
     let searchData = await response.json()
-    console.log(searchData)
 
     displayResults(searchData)
 
@@ -104,10 +103,10 @@ function displayResults(searchData) {
     data.results.forEach(movie => {
         // if else for movie.poster_path
         if (movie.poster_path == null) {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" width="312" height="468">
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" onclick="showPopUp(${movie.id}) width="312" height="468">
         <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         } else {
-            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" onclick="showPopUp(${movie.id}) width="312" height="468">
             <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
         }
     });
@@ -128,6 +127,33 @@ function showMoreSearch() {
     getResults()
 }
 
+async function showPopUp(movie_id) {
+   
+   let url = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${MY_API_KEY}&language=en-US`
+   let movieResponse = await fetch(url)
+   let movieResponseData = await movieResponse.json()
+
+   //console.log(movieResponseData)
+
+   let modal = document.getElementById("moviePopUp");
+   let span = document.getElementsByClassName("close")[0];
+   modal.style.display = "block";
+
+   span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+   //movieResponseData = ''
+
+   //console.log(movieResponseData)
+}
+
 function handleFormSubmission(evt) {
     pageNum = 1
     movieArea.innerHTML = ``
@@ -139,5 +165,4 @@ function handleFormSubmission(evt) {
 
 window.onload = function () {
     getTrending();
-    console.log("https://api.themoviedb.org/3/configuration?api_key=0dce21e41025b5df140c7122a2a69ba6")
   }
