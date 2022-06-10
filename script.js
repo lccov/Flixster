@@ -46,7 +46,7 @@ function displayTrending(trendingData) {
 
     data.results.forEach(movie => {
         movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
-        <p class="movie-votes">${movie.vote_average}</p> <p class="movie-title">${movie.original_title}</p></div>`
+         <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
     });
 
     pageNum += 1
@@ -98,7 +98,7 @@ function displayResults(searchData) {
 
     data.results.forEach(movie => {
         movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
-        <p class="movie-votes">${movie.vote_average}</p> <p class="movie-title">${movie.original_title}</p></div>`
+        <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
     });
 
     backupSearchKey = searchKey
