@@ -6,7 +6,7 @@ body {
 }
 
 p {
-    color: white;
+    color: #FFFFFF;
 }
 
 header{
@@ -14,6 +14,18 @@ header{
     display: flex;
     justify-content: flex-end;
     background-color: #14213d;
+}
+
+button {
+    background-color: #373b69;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 #search-input {
@@ -85,15 +97,5 @@ header{
     text-align: center;
 }
 
-button {
-    background-color: #373b69;
-    border: none;
-    color: #FFFFFF;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 10px;
-}
+
 

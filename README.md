@@ -39,6 +39,7 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 - [ ] Improve the user experience through CSS & animation.
 - [ ] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [X] Allow user to load more movies for searches
+- [X] Added placerholder image if movie poster was not available
 - [ ] Implement anything else that you can get done to improve the app functionality!
 
 ### Walkthrough Video

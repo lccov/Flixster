@@ -45,8 +45,13 @@ function displayTrending(trendingData) {
     data = trendingData
 
     data.results.forEach(movie => {
-        movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
-         <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+        if (movie.poster_path == null) {
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" width="312" height="468">
+        <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+        } else {
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+            <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+        }
     });
 
     pageNum += 1
@@ -97,8 +102,14 @@ function displayResults(searchData) {
     data = searchData
 
     data.results.forEach(movie => {
-        movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+        // if else for movie.poster_path
+        if (movie.poster_path == null) {
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src="images/poster-not-found.png" alt="Placeholder image for ${movie.original_title} movie poster" width="312" height="468">
         <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+        } else {
+            movieArea.innerHTML += `<div class="movie-card"><img class="movie-poster" src=https://image.tmdb.org/t/p/w780${movie.poster_path} alt="${movie.original_title} movie poster" width="312" height="468">
+            <div class="movie-info"><p class="movie-title">${movie.original_title}</p><p class="movie-votes">&#11088; ${movie.vote_average}</p></div></div>`
+        }
     });
 
     backupSearchKey = searchKey
