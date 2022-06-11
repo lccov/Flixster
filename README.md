@@ -43,7 +43,7 @@ Deployed Application (optional): [Flixster Deployed Site]https://lccovington.git
 
 ### Walkthrough Video
 
-![Walkthrough video for Flixster app](images\FlixsterApp.gif)
+![Walkthrough video for Flixster app](images/FlixsterApp.gif)
 
 ### Reflection
 
