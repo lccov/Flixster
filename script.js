@@ -3,7 +3,7 @@ const MY_API_KEY = '0dce21e41025b5df140c7122a2a69ba6';
 
 let form = document.querySelector("form")
 let movieArea = document.querySelector("#movies-grid")
-let showMoreTrendingBtn = document.querySelector("#load-more-movies-trending-btn")
+let showMoreTrendingBtn = document.querySelector("#load-more-movies-btn")
 let showMoreSearchBtn = document.querySelector("#load-more-movies-search-btn")
 let userInput = document.querySelector("#search-input")
 let closeBtn = document.querySelector("#close-search-btn")
@@ -156,16 +156,10 @@ async function showPopUp(movie_id) {
     }
   }
 
-  console.log(movieVideoResponseData.results[0].key)
-
   modalContent.innerHTML += `<iframe width="420" height="315"
   src="https://www.youtube.com/embed/${movieVideoResponseData.results[0].key}">
   </iframe>
   <p>Title: ${movieDetailResponseData.title} | Release Date: ${movieDetailResponseData.release_date} | Viewer Rating: ${movieDetailResponseData.vote_average}/10 | Homepage: <a href="${movieDetailResponseData.homepage}">${movieDetailResponseData.homepage}</a></p><p>${movieDetailResponseData.overview}</p>`
-
-   //movieResponseData = ''
-
-   //console.log(movieResponseData)
 }
 
 function closePopUp() {
