@@ -4,7 +4,7 @@ Submitted by: **Lacie Covington**
 
 Estimated time spent: **15** hours spent in total
 
-Deployed Application (optional): [Flixster Deployed Site](https://lccovington.github.io/Flixster/)
+Deployed Application (optional): [Flixster Deployed Site](https://lccov.github.io/Flixster/)
 
 ### Application Features
 
