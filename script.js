@@ -1,5 +1,5 @@
 // GLOBAL CONSTANTS
-const MY_API_KEY = '0dce21e41025b5df140c7122a2a69ba6';
+const MY_API_KEY =;
 const scrollUp = document.getElementById("scroll-up");
 
 let form = document.querySelector("form")
